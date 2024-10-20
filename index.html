@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gentry</title>
+	<link rel="stylesheet" href="./frontend/css/style.css">
+	<link rel="shortcut icon" href="#" />
+	<script src="./backend/js/main.js" type="module" defer></script>
+</head>
+<body>
+	<header>
+		<div class="inner-header">
+			<div class="logo-container">
+				<h1><span>Gen</span>try<span class="version"> 0.1.4</span></h1>
+			</div>
+
+			<ul class="navbar">
+				<li class="bar" id="btnPerson"><a>Персоны</a></li>
+				<li class="bar" id="btnTree"><a>Древо</a></li>
+				<li class="bar"id="btnEvent"><a>События</a></li>
+				<li class="bar" id="btnDocs"><a>Документы</a></li>
+				<li class="bar"id="btnMaps"><a>Карта</a></li>
+				<li class="bar" id="btnSettings">
+					<a>Настройки</a>
+					<ul class="dropdown" id="dropdown">
+						<li class="dropdown-bar" id="btnCreate"><a>Создать</a></li>
+						<li class="dropdown-bar" id="btnLoad"><input type="file" id="btnLoadInput"><label for="btnLoadInput"><a>Загрузить</a></label></li>
+						<li class="dropdown-bar" id="btnSave"><a>Сохранить</a></li>
+						<li class="dropdown-bar" id="btnMode"><a>Режимы</a></li>
+						<li class="dropdown-bar" id="btnExport"><a>Экспорт</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</header>
+	<main>
+		<section id="sectionPerson"><p>Раздел "Персоны" находится в разработке</p></section>
+		<canvas width="1920px" height="1080px" id="sectionTree">No canvas</canvas>
+		<!--
+		<div class="canvas-wrapper">
+			<canvas id="canvasMain"></canvas>
+			<button class="size-btn"><img src="./frontend/img/full-screen.png"></button>
+		</div>
+		-->
+		<section id="sectionEvent"><p>Раздел "События" находится в разработке</p></section>
+		<section id="sectionDocument"><p>Раздел "Документы" находится в разработке</p></section>
+		<section id="sectionMap"><p>Раздел "Карта" находится в разработке</p></section>
+	</main>
+</body>
+</html>
