@@ -10,6 +10,12 @@
 :root{
 	--main-color: #101010;
 	--action-color: #0866FF;
+	--action-color-hover: #0b57d3;
+	--action-color-active: #083e96;
+
+
+	--side-panel-height: 100%;
+
 }
 
 
@@ -180,6 +186,60 @@ main{
 	#sectionTree{
 		display: none;
 	}
+	
+
+	#sidePanel{
+		width: 20%;
+		height: 100vh;
+		position: absolute;
+		right: 0;
+		top: 0;
+		display: none;
+		flex-direction: row;
+		justify-content: start;
+
+		#sidePanelBtn{
+			width: 30px;
+			height: 100vh;
+			background-color: var(--action-color);
+			transition: all .3s ease;
+			border: none;
+		}
+
+		#sidePanelBtn:hover{
+			background-color: var(--action-color-hover);
+		}
+
+		#sidePanelBtn:active{
+			background-color: var(--action-color-active);
+		}
+
+		#sidePanelInfo{
+
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 15px;
+			padding-top: 40px;
+
+			background-color: #fff;
+
+
+
+			#sidePanelImg{
+				width: 85%;
+				height: auto;
+			}
+
+			#sidePanelTitel{
+				font-size: 1.2em;
+				max-width: 88%;
+			}
+		}
+	}
+
+
+
 	// .canvas-wrapper{
 	// 	// position: relative;
 	// 	// canvas{

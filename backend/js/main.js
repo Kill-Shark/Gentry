@@ -34,6 +34,10 @@ const sectionEvent = document.getElementById("sectionEvent")
 const sectionDocument = document.getElementById("sectionDocument")
 const sectionMap = document.getElementById("sectionMap")
 
+const sidePanel = document.getElementById("sidePanel")
+const sidePanelBtn = document.getElementById("sidePanelBtn")
+const sidePanelInfo = document.getElementById("sidePanelInfo")
+
 // автоматическое закрытие панели настроек после нажатия кнопки
 document.querySelectorAll(".dropdown-bar").forEach(n => n.addEventListener("click", ()=>{
 	dropdown.classList.add("closed");
@@ -87,6 +91,7 @@ function build_tree(e) {
 
 	cleanSectionClasses()
 	sectionTree.style.display = "block";
+	sidePanel.style.display = "flex"
 }
 
 sectionTree.addEventListener("wheel", (e) => {
@@ -117,6 +122,7 @@ sectionTree.addEventListener("mousemove", (e) => {
 function cleanSectionClasses(){
 	sectionPerson.classList.remove("sectionActive")
 	sectionTree.style.display = "none";
+	sidePanel.style.display = "none";
 	sectionEvent.classList.remove("sectionActive")
 	sectionDocument.classList.remove("sectionActive")
 	sectionMap.classList.remove("sectionActive")
@@ -147,3 +153,18 @@ function switchToMapsSection(){
 	cleanSectionClasses()
 	sectionMap.classList.add("sectionActive")
 }
+
+sidePanelBtn.addEventListener("click", ()=>{
+
+	let a = "40px";
+
+	if(sidePanel.style.width == a){
+		sidePanel.style.width = "20%";
+		sidePanelInfo.style.display = "flex"
+
+	}else{
+		sidePanel.style.width = "40px";
+		sidePanelInfo.style.display = "none"
+	}
+
+})
