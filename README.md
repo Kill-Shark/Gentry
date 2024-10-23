@@ -1,2 +1,2 @@
 ## A family friendly program
-### https://kill-shark.github.io/Gentry
+### https://gentry.killshark.com
