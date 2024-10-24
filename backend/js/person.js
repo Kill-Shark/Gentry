@@ -173,7 +173,10 @@ export class Person {
 			if (name.length)
 				name += " "
 
-			name += "(" + this.name_birth.last + ")"
+			if (this.name_birth.last)
+				name += "(" + this.name_birth.last + ")"
+			else
+				name += "()"
 		}
 
 		if (this.name_actual.first) {
