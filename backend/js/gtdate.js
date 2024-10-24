@@ -4,6 +4,21 @@
 
 import * as sym from "./sym.js"
 
+const months = {
+	1: ["январь", "января"],
+	2: ["февраль", "февраля"],
+	3: ["март", "марта"],
+	4: ["апрель", "апреля"],
+	5: ["май", "мая"],
+	6: ["июнь", "июня"],
+	7: ["июль", "июля"],
+	8: ["август", "августа"],
+	9: ["сентябрь", "сентября"],
+	10: ["окрябрь", "октября"],
+	11: ["ноябрь", "ноября"],
+	12: ["декабрь", "декабря"]
+}
+
 export class GtDate {
 	constructor(s) {
 		this.approx = false
@@ -47,11 +62,14 @@ export class GtDate {
 		return 0
 	}
 
+	diff(date) {
+		; // TODO
+	}
+
 	to_string() {
 		let s = ""
-		if (this.approx) {
+		if (this.approx)
 			s = sym.APPROX
-		}
 
 		if (this.year) {
 			s = s + this.year
@@ -70,6 +88,26 @@ export class GtDate {
 			}
 			s = s + "-" + day
 		}
+
+		return s
+	}
+
+	to_human_string() {
+		let s = ""
+		if (this.approx) {
+			s = sym.APPROX
+			s += this.year.toString()
+			return s
+		}
+
+		if (this.day)
+			s += this.day.toString() + " "
+
+		if (this.month)
+			s += months[this.month][1] + " "
+
+		if (this.year)
+			s += this.year.toString()
 
 		return s
 	}

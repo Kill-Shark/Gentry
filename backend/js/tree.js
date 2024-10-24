@@ -54,6 +54,10 @@ export class Tree {
 		this.nodes = nodes
 
 		this.bg = bg
+
+		this.zoom = 1.0
+		this.pan_x = 0
+		this.pan_y = 0
 	}
 
 	foreach(func) {
@@ -62,8 +66,23 @@ export class Tree {
 			if (node.is_hidden())
 				continue
 
-			func(node)
+			let ret = func(node)
+			if (ret)
+				return ret
 		}
+	}
+
+	get_at(x, y) {
+		let width = this.view.w / 2 * this.zoom
+		let height = this.view.h / 2 * this.zoom
+		let node = this.foreach((node) => {
+			if (Math.abs(node.tx - x) < width &&
+			    Math.abs(node.ty - y) < height) {
+				return node
+			}
+		})
+
+		return node
 	}
 
 	build(view=VIEW) {
@@ -146,14 +165,26 @@ export class Tree {
 	}
 
 	fit(sheet) {
-		return sheet.height / (this.max_y - this.min_y)
+		this.zoom = sheet.height / (this.max_y - this.min_y)
 	}
 
-	draw(sheet, zoom, pan_x, pan_y) {
+	zoom_in(ex, ey) {
+		this.zoom += 0.1 * this.zoom
+		this.pan_x = this.pan_x + (this.pan_x - ex) * 0.1
+		this.pan_y = this.pan_y + (this.pan_y - ey) * 0.1
+	}
+
+	zoom_out(ex, ey) {
+		this.zoom -= 0.1 * this.zoom
+		this.pan_x = this.pan_x - (this.pan_x - ex) * 0.1
+		this.pan_y = this.pan_y - (this.pan_y - ey) * 0.1
+	}
+
+	draw(sheet) {
 		let ctx = sheet.getContext("2d")
 
-		let w = this.view.w * zoom
-		let h = this.view.h * zoom
+		let w = this.view.w * this.zoom
+		let h = this.view.h * this.zoom
 
 		rand_seed_set(0)
 
@@ -165,13 +196,13 @@ export class Tree {
 			if (node.hue == undefined)
 				node.hue = randint(360)
 
-			node.tx = (node.x - this.min_x) * zoom + pan_x
-			node.ty = (node.y - this.min_y) * zoom + pan_y
+			node.tx = (node.x - this.min_x) * this.zoom + this.pan_x
+			node.ty = (node.y - this.min_y) * this.zoom + this.pan_y
 			node.rx = node.tx - w / 2
 			node.ry = node.ty - h / 2
 
-			node.root_tx = (node.root_x - this.min_x) * zoom + pan_x
-			node.root_ty = (node.root_y - this.min_y) * zoom + pan_y
+			node.root_tx = (node.root_x - this.min_x) * this.zoom + this.pan_x
+			node.root_ty = (node.root_y - this.min_y) * this.zoom + this.pan_y
 		}
 
 		ctx.fillStyle = this.bg
@@ -192,8 +223,8 @@ export class Tree {
 					continue
 
 				let mid = node.get_middle(mate, this.view)
-				let mid_x = (mid[0] - this.min_x) * zoom + pan_x
-				let mid_y = (mid[1] - this.min_y) * zoom + pan_y
+				let mid_x = (mid[0] - this.min_x) * this.zoom + this.pan_x
+				let mid_y = (mid[1] - this.min_y) * this.zoom + this.pan_y
 
 				let node_grab_x = 0
 				let mate_grab_x = 0
@@ -268,7 +299,7 @@ export class Tree {
 			if (node.title_ratio)
 				title_ratio = node.title_ratio
 
-			let margin = this.view.margin * zoom
+			let margin = this.view.margin * this.zoom
 			let title_h = h - margin * 2
 			let title_w = title_h * title_ratio
 			let info_x = margin * 2 + title_w

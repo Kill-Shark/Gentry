@@ -149,6 +149,50 @@ export class Person {
 		return this.y
 	}
 
+	get_data() {
+		let data = {}
+		data["title"] = this.title
+		data["name"] = this.get_name_string()
+		if (this.birth)
+			data["birth"] = this.birth.to_human_string()
+
+		if (this.death)
+			data["death"] = this.death.to_human_string()
+
+		return data
+	}
+
+	get_name_string() {
+		name = ""
+
+		if (this.name_actual.last)
+			name += this.name_actual.last
+
+		if (this.name_birth &&
+		    this.name_birth.last != this.name_actual.last) {
+			if (name.length)
+				name += " "
+
+			name += "(" + this.name_birth.last + ")"
+		}
+
+		if (this.name_actual.first) {
+			if (name.length)
+				name += " "
+
+			name += this.name_actual.first
+		}
+
+		if (this.name_actual.patronym) {
+			if (name.length)
+				name += " "
+
+			name += this.name_actual.patronym
+		}
+
+		return name
+	}
+
 	update() {
 		let name_date = new GtDate("0")
 

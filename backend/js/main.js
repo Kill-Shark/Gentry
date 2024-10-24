@@ -7,10 +7,6 @@ import {Gen} from "./gen.js"
 let gen
 let tree
 
-let zoom = 1.0
-let pan_x = 0
-let pan_y = 0
-
 //кнопки в navbar
 const
 btnPerson = document.getElementById("btnPerson"),
@@ -37,6 +33,17 @@ const sectionMap = document.getElementById("sectionMap")
 const sidePanel = document.getElementById("sidePanel")
 const sidePanelBtn = document.getElementById("sidePanelBtn")
 const sidePanelInfo = document.getElementById("sidePanelInfo")
+
+const sidePanelImg = document.getElementById("sidePanelImg")
+const sidePanelTitle = document.getElementById("sidePanelTitle")
+const sidePanelBirthDate = document.getElementById("sidePanelBirthDate")
+const sidePanelBirthPlace = document.getElementById("sidePanelBirthPlace")
+const sidePanelAgeNum = document.getElementById("sidePanelAgeNum")
+const sidePanelDeathDate = document.getElementById("sidePanelDeathDate")
+const sidePanelDeathPlace = document.getElementById("sidePanelDeathPlace")
+const sidePanelDeathCause = document.getElementById("sidePanelDeathCause")
+const sidePanelFatherName = document.getElementById("sidePanelFatherName")
+const sidePanelMotherName = document.getElementById("sidePanelMotherName")
 
 // автоматическое закрытие панели настроек после нажатия кнопки
 document.querySelectorAll(".dropdown-bar").forEach(n => n.addEventListener("click", ()=>{
@@ -78,8 +85,8 @@ function build_tree(e) {
 		return
 
 	tree = gen.tree_get(tree_type)
-	zoom = tree.fit(sectionTree)
-	tree.draw(sectionTree, zoom, pan_x, pan_y)
+	tree.fit(sectionTree)
+	tree.draw(sectionTree)
 
 	// TEMP
 	if (tree_type == "common") {
@@ -95,27 +102,97 @@ function build_tree(e) {
 }
 
 sectionTree.addEventListener("wheel", (e) => {
+	if (tree == undefined)
+		return
+
 	if (e.deltaY < 0) {
-		zoom += 0.1 * zoom
-		pan_x = pan_x + (pan_x - e.x) * 0.1
-		pan_y = pan_y + (pan_y - e.y) * 0.1
+		tree.zoom_in(e.x, e.y)
 
 	} else {
-		zoom -= 0.1 * zoom
-		pan_x = pan_x - (pan_x - e.x) * 0.1
-		pan_y = pan_y - (pan_y - e.y) * 0.1
+		tree.zoom_out(e.x, e.y)
 	}
 
-	if (tree != undefined)
-		tree.draw(sectionTree, zoom, pan_x, pan_y)
+	tree.draw(sectionTree)
 });
 
 sectionTree.addEventListener("mousemove", (e) => {
+	if (tree == undefined)
+		return
+
 	if (e.buttons == 1) {
-		pan_x += e.movementX
-		pan_y += e.movementY
-		if (tree != undefined)
-			tree.draw(sectionTree, zoom, pan_x, pan_y)
+		tree.pan_x += e.movementX
+		tree.pan_y += e.movementY
+		tree.draw(sectionTree)
+	}
+});
+
+sectionTree.addEventListener("mousedown", (e) => {
+	if (tree == undefined)
+		return
+
+	tree.mpx = e.x
+	tree.mpy = e.y
+});
+
+sectionTree.addEventListener("click", (e) => {
+	if (tree == undefined)
+		return
+
+	if (Math.abs(tree.mpx - e.x) + Math.abs(tree.mpy - e.y) > 5)
+		return
+
+	let node = tree.get_at(e.layerX, e.layerY)
+	if (node) {
+		let data = node.person.get_data()
+
+		if (data["title"])
+			sidePanelImg.src = data["title"].src
+		else
+			sidePanelImg.src = "./frontend/img/no-image.webp"
+
+		sidePanelTitle.innerHTML = data["name"]
+
+		if (data["birth"])
+			sidePanelBirthDate.innerHTML = data["birth"]
+		else
+			sidePanelBirthDate.innerHTML = "-"
+
+		if (data["birth_place"])
+			;
+		else
+			sidePanelBirthPlace.innerHTML = "-"
+
+		if (data["age"])
+			;
+		else
+			sidePanelAgeNum.innerHTML = "-"
+
+		if (data["death"])
+			sidePanelDeathDate.innerHTML = data["death"]
+		else
+			sidePanelDeathDate.innerHTML = "-"
+
+		if (data["death_place"])
+			;
+		else
+			sidePanelDeathPlace.innerHTML = "-"
+
+		if (data["death_cause"])
+			;
+		else
+			sidePanelDeathCause.innerHTML = "-"
+
+		if (data["father"])
+			;
+		else
+			sidePanelFatherName.innerHTML = "-"
+
+		if (data["mother"])
+			;
+		else
+			sidePanelMotherName.innerHTML = "-"
+
+		tree.draw(sectionTree)
 	}
 });
 
