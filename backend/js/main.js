@@ -243,6 +243,7 @@ sidePanelBtn.addEventListener("click", ()=>{
 	sidePanel.classList.toggle("toggleSidePanel");
 	sidePanelInfo.classList.toggle("toggleSidePanelInfo")
 	btnArrow.classList.toggle("reversed")
+	
 })
 
 

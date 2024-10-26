@@ -11,7 +11,7 @@
   --action-color: #0866FF;
   --action-color-hover: #0b57d3;
   --action-color-active: #083e96;
-  --side-panel-height: 100%;
+  --sidePanelBtnWidth: 25px;
 }
 
 * {
@@ -169,14 +169,14 @@ main aside {
   right: 0;
   top: 0;
   display: none;
-  grid-template-columns: 25px 1fr;
+  grid-template-columns: var(--sidePanelBtnWidth) 1fr;
   background-color: #eee;
 }
 main aside #sidePanelBtn {
   background-color: var(--action-color);
   transition: all 0.3s ease;
   border: none;
-  width: 25px;
+  width: var(--sidePanelBtnWidth);
   grid-column: 1/2;
   display: flex;
   justify-content: center;
@@ -209,7 +209,6 @@ main aside .sidePanelInfo div {
 main aside .sidePanelInfo #sidePanelTitle {
   text-align: center;
   font-family: Merriweather-bold;
-  padding: 0 5px 0 5px;
 }
 main aside .sidePanelInfo #sidePanelImg {
   width: 320px;
@@ -220,7 +219,7 @@ main aside .sidePanelInfo #sidePanelBirthDate {
   font-family: Merriweather-bold;
 }
 main aside .toggleSidePanel {
-  width: 25px;
+  width: var(--sidePanelBtnWidth);
   display: grid;
 }
 main aside .toggleSidePanelInfo {
