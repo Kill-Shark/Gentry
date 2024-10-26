@@ -6,11 +6,21 @@
   font-family: Merriweather-bold;
   src: url(../files/merriweather/Merriweather-Bold.ttf);
 }
+@font-face {
+  font-family: Merriweather-italic;
+  src: url(../files/merriweather/Merriweather-Italic.ttf);
+}
+@font-face {
+  font-family: Merriweather-light-italic;
+  src: url(../files/merriweather/Merriweather-LightItalic.ttf);
+}
 :root {
   --main-color: #101010;
   --action-color: #0866FF;
   --action-color-hover: #0b57d3;
   --action-color-active: #083e96;
+  --absent-color: #ca904e;
+  --starterPageBottom: 30px;
   --sidePanelBtnWidth: 25px;
 }
 
@@ -29,6 +39,74 @@ body {
   overflow-y: hidden;
 }
 
+#starterPage {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--main-color);
+  background-color: #000000;
+  opacity: 1;
+  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #000000 40px), repeating-linear-gradient(rgba(17, 17, 17, 0.3333333333), #111111);
+}
+#starterPage .logo-container-start {
+  margin-bottom: var(--starterPageBottom);
+  display: table;
+  float: left;
+  cursor: default;
+  font-size: 55px;
+}
+#starterPage .logo-container-start h1 {
+  color: #fff;
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+#starterPage .logo-container-start h1 span {
+  font-family: Merriweather-bold;
+}
+#starterPage .logo-container-start h1 .version {
+  font-family: Merriweather-regular;
+  font-size: 50%;
+  color: var(--action-color);
+}
+#starterPage .starter-defenition {
+  color: #fff;
+  font-size: 25px;
+  margin-bottom: var(--starterPageBottom);
+  background-color: #171717;
+  padding: 50px;
+  border-radius: 10px;
+}
+#starterPage .starter-defenition p {
+  margin-bottom: var(--starterPageBottom);
+  font-family: Merriweather-italic;
+}
+#starterPage .starter-defenition ul {
+  font-family: Merriweather-light-italic;
+}
+#starterPage .starter-defenition ul li {
+  padding: 5px 0;
+}
+#starterPage a {
+  padding: 0 20px;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  font-size: 18px;
+  font-family: Merriweather-bold;
+  transition: 0.3s all ease;
+  cursor: pointer;
+  font-size: 30px;
+}
+#starterPage a:hover {
+  color: var(--action-color);
+}
+#starterPage #btnLoadInputStart {
+  display: none;
+}
+
 header {
   width: 100%;
   min-height: 80px;
@@ -38,6 +116,7 @@ header {
   align-items: center;
   background-color: var(--main-color);
   height: 5vh;
+  display: none;
 }
 
 .inner-header {
@@ -53,7 +132,7 @@ header {
   height: 100%;
   display: table;
   float: left;
-  cursor: pointer;
+  cursor: default;
   margin-right: 10px;
 }
 .logo-container h1 {

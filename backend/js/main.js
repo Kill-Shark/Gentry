@@ -7,8 +7,15 @@ import {Gen} from "./gen.js"
 let gen
 let tree
 
+//стартовые кнопки
+
+const 
+btnCreateStart = document.getElementById("btnCreateStart"),
+btnLoadInputStart = document.getElementById("btnLoadInputStart")
+
 //кнопки в navbar
 const
+btnLogo = document.getElementById("btnLogo"),
 btnPerson = document.getElementById("btnPerson"),
 btnTree = document.getElementById("btnTree"),
 btnEvent = document.getElementById("btnEvent"),
@@ -47,12 +54,24 @@ const sidePanelMotherName = document.getElementById("sidePanelMotherName")
 
 const btnArrow = document.getElementById("btnArrow")
 
+const starterPage = document.getElementById("starterPage")
+const loadedPage = document.getElementById("loadedPage")
+
 // автоматическое закрытие панели настроек после нажатия кнопки
 document.querySelectorAll(".dropdown-bar").forEach(n => n.addEventListener("click", ()=>{
 	dropdown.classList.add("closed");
 }))
 btnSettings.addEventListener("mousemove", () => {
 	dropdown.classList.remove("closed");
+})
+
+//стартовая страница
+btnLoadInputStart.addEventListener("change", (e) => {
+	starterPage.style.display = "none";
+	loadedPage.style.display = "flex";
+	read_file(e.target.files[0])
+
+	sectionPerson.classList.add("sectionActive")
 })
 
 btnLoadInput.addEventListener("change", (e) => {
@@ -214,10 +233,12 @@ function cleanSectionClasses(){
 
 }
 
+// btnLogo.addEventListener("click", switchToLogoSection)
 btnEvent.addEventListener("click", switchToEventSection)
 btnPerson.addEventListener("click", switchToPersonSection)
 btnDocs.addEventListener("click", switchToDocumentSection)
 btnMaps.addEventListener("click", switchToMapsSection)
+
 
 function switchToEventSection(){
 	cleanSectionClasses()
@@ -238,6 +259,11 @@ function switchToMapsSection(){
 	cleanSectionClasses()
 	sectionMap.classList.add("sectionActive")
 }
+
+// function switchToLogoSection(){
+// 	cleanSectionClasses()
+// 	starterPage.style.display = "flex"
+// }
 
 sidePanelBtn.addEventListener("click", ()=>{
 	sidePanel.classList.toggle("toggleSidePanel");
