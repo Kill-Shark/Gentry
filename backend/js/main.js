@@ -45,6 +45,7 @@ const sidePanelDeathCause = document.getElementById("sidePanelDeathCause")
 const sidePanelFatherName = document.getElementById("sidePanelFatherName")
 const sidePanelMotherName = document.getElementById("sidePanelMotherName")
 
+
 // автоматическое закрытие панели настроек после нажатия кнопки
 document.querySelectorAll(".dropdown-bar").forEach(n => n.addEventListener("click", ()=>{
 	dropdown.classList.add("closed");
@@ -98,7 +99,7 @@ function build_tree(e) {
 
 	cleanSectionClasses()
 	sectionTree.style.display = "block";
-	sidePanel.style.display = "flex"
+	sidePanel.style.display = "grid"
 }
 
 sectionTree.addEventListener("wheel", (e) => {
@@ -157,6 +158,7 @@ sectionTree.addEventListener("click", (e) => {
 		else
 			sidePanelBirthDate.innerHTML = "-"
 
+
 		if (data["birth_place"])
 			;
 		else
@@ -193,6 +195,8 @@ sectionTree.addEventListener("click", (e) => {
 			sidePanelMotherName.innerHTML = "-"
 
 		tree.draw(sectionTree)
+		sidePanelInfo.classList.add("toggleSidePanelInfo")
+
 	}
 });
 
@@ -232,16 +236,6 @@ function switchToMapsSection(){
 }
 
 sidePanelBtn.addEventListener("click", ()=>{
-
-	let a = "40px";
-
-	if(sidePanel.style.width == a){
-		sidePanel.style.width = "20%";
-		sidePanelInfo.style.display = "flex"
-
-	}else{
-		sidePanel.style.width = "40px";
-		sidePanelInfo.style.display = "none"
-	}
-
+	sidePanel.classList.toggle("toggleSidePanel");
+	sidePanelInfo.classList.toggle("toggleSidePanelInfo")
 })

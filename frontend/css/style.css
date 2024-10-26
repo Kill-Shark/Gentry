@@ -152,54 +152,65 @@ main section {
   position: absolute;
   top: 0;
   display: none;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-left: 50%;
-  margin-top: 10%;
 }
 main .sectionActive {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
 }
 main #sectionTree {
   display: none;
 }
-main #sidePanel {
-  width: 20%;
+main aside {
   height: 100vh;
   position: absolute;
   right: 0;
   top: 0;
   display: none;
-  flex-direction: row;
-  justify-content: start;
+  grid-template-columns: 20px 1fr;
+  background-color: #eee;
 }
-main #sidePanel #sidePanelBtn {
-  width: 30px;
-  height: 100vh;
+main aside #sidePanelBtn {
   background-color: var(--action-color);
   transition: all 0.3s ease;
   border: none;
+  width: 25px;
+  grid-column: 1/2;
 }
-main #sidePanel #sidePanelBtn:hover {
+main aside #sidePanelBtn:hover {
   background-color: var(--action-color-hover);
 }
-main #sidePanel #sidePanelBtn:active {
+main aside #sidePanelBtn:active {
   background-color: var(--action-color-active);
 }
-main #sidePanel #sidePanelInfo {
-  display: flex;
+main aside .sidePanelInfo {
+  display: none;
+  min-width: 457px;
   flex-direction: column;
-  align-items: center;
   gap: 15px;
-  padding-top: 40px;
-  background-color: #fff;
 }
-main #sidePanel #sidePanelInfo #sidePanelImg {
-  width: 85%;
-  height: auto;
+main aside .sidePanelInfo div {
+  display: flex;
+  justify-content: center;
 }
-main #sidePanel #sidePanelInfo #sidePanelTitel {
-  font-size: 1.2em;
-  max-width: 88%;
+main aside .sidePanelInfo #sidePanelTitle {
+  text-align: center;
+  font-family: Merriweather-bold;
+}
+main aside .sidePanelInfo #sidePanelImg {
+  width: 240px;
+  height: 320px;
+  margin-top: 10px;
+}
+main aside .sidePanelInfo #sidePanelBirthDate {
+  font-family: Merriweather-bold;
+}
+main aside .toggleSidePanel {
+  width: 25px;
+  display: grid;
+}
+main aside .toggleSidePanelInfo {
+  display: flex;
 }/*# sourceMappingURL=style.css.map */
