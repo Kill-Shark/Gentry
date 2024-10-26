@@ -45,6 +45,7 @@ const sidePanelDeathCause = document.getElementById("sidePanelDeathCause")
 const sidePanelFatherName = document.getElementById("sidePanelFatherName")
 const sidePanelMotherName = document.getElementById("sidePanelMotherName")
 
+const btnArrow = document.getElementById("btnArrow")
 
 // автоматическое закрытие панели настроек после нажатия кнопки
 document.querySelectorAll(".dropdown-bar").forEach(n => n.addEventListener("click", ()=>{
@@ -197,6 +198,9 @@ sectionTree.addEventListener("click", (e) => {
 		tree.draw(sectionTree)
 		sidePanelInfo.classList.add("toggleSidePanelInfo")
 
+		if(btnArrow.classList.contains("reversed") != true){
+			btnArrow.classList.toggle("reversed")
+		}
 	}
 });
 
@@ -238,4 +242,7 @@ function switchToMapsSection(){
 sidePanelBtn.addEventListener("click", ()=>{
 	sidePanel.classList.toggle("toggleSidePanel");
 	sidePanelInfo.classList.toggle("toggleSidePanelInfo")
+	btnArrow.classList.toggle("reversed")
 })
+
+

@@ -169,7 +169,7 @@ main aside {
   right: 0;
   top: 0;
   display: none;
-  grid-template-columns: 20px 1fr;
+  grid-template-columns: 25px 1fr;
   background-color: #eee;
 }
 main aside #sidePanelBtn {
@@ -178,6 +178,17 @@ main aside #sidePanelBtn {
   border: none;
   width: 25px;
   grid-column: 1/2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main aside #sidePanelBtn .btnArrow {
+  width: 22px;
+  height: 22px;
+  transform: scale(1, 1);
+}
+main aside #sidePanelBtn .reversed {
+  transform: scale(-1, 1);
 }
 main aside #sidePanelBtn:hover {
   background-color: var(--action-color-hover);
@@ -187,7 +198,7 @@ main aside #sidePanelBtn:active {
 }
 main aside .sidePanelInfo {
   display: none;
-  min-width: 457px;
+  min-width: 460px;
   flex-direction: column;
   gap: 15px;
 }
@@ -198,10 +209,11 @@ main aside .sidePanelInfo div {
 main aside .sidePanelInfo #sidePanelTitle {
   text-align: center;
   font-family: Merriweather-bold;
+  padding: 0 5px 0 5px;
 }
 main aside .sidePanelInfo #sidePanelImg {
-  width: 240px;
-  height: 320px;
+  width: 320px;
+  height: 426.6666666667px;
   margin-top: 10px;
 }
 main aside .sidePanelInfo #sidePanelBirthDate {

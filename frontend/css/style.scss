@@ -195,7 +195,7 @@ main{
 		right: 0;
 		top: 0;
 		display: none;
-		grid-template-columns: 20px 1fr;
+		grid-template-columns: 25px 1fr;
 		background-color: #eee;
 		
 
@@ -206,6 +206,22 @@ main{
 			border: none;
 			width: 25px;
 			grid-column: 1/2;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+
+			.btnArrow{
+				width: 22px;
+				height: 22px;
+				transform: scale(1, 1)
+			}
+
+			.reversed{
+				transform: scale(-1, 1)
+			}
+
 		}
 		#sidePanelBtn:hover{
 			background-color: var(--action-color-hover);
@@ -216,7 +232,7 @@ main{
 
 		.sidePanelInfo{
 			display: none;
-			min-width: 457px;
+			min-width: 460px;
 			// overflow-y: scroll;
 
 			flex-direction: column;
@@ -230,11 +246,12 @@ main{
 			#sidePanelTitle{
 				text-align: center;
 				font-family: Merriweather-bold;
+				padding: 0 5px 0 5px;
 			}
 
 			#sidePanelImg{
-				width: 240px;
-				height: 320px;
+				width: calc(480px / 1.5);
+				height: calc(640px / 1.5);
 				margin-top: 10px;
 			}
 
