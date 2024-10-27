@@ -42,7 +42,8 @@ const sidePanelBtn = document.getElementById("sidePanelBtn")
 const sidePanelInfo = document.getElementById("sidePanelInfo")
 
 const sidePanelImg = document.getElementById("sidePanelImg")
-const sidePanelTitle = document.getElementById("sidePanelTitle")
+const sidePanelLastName = document.getElementById("sidePanelLastName")
+const sidePanelRestName = document.getElementById("sidePanelRestName")
 const sidePanelBirthDate = document.getElementById("sidePanelBirthDate")
 const sidePanelBirthPlace = document.getElementById("sidePanelBirthPlace")
 const sidePanelAgeNum = document.getElementById("sidePanelAgeNum")
@@ -171,7 +172,8 @@ sectionTree.addEventListener("click", (e) => {
 		else
 			sidePanelImg.src = "./frontend/img/no-image.webp"
 
-		sidePanelTitle.innerHTML = data["name"]
+		sidePanelLastName.innerHTML = data["last_name"]
+		sidePanelRestName.innerHTML = data["rest_name"]
 
 		if (data["birth"])
 			sidePanelBirthDate.innerHTML = data["birth"]
@@ -180,12 +182,12 @@ sectionTree.addEventListener("click", (e) => {
 
 
 		if (data["birth_place"])
-			;
+			sidePanelBirthPlace.innerHTML = data["birth_place"]
 		else
 			sidePanelBirthPlace.innerHTML = "-"
 
 		if (data["age"])
-			;
+			sidePanelAgeNum.innerHTML = data["age"]
 		else
 			sidePanelAgeNum.innerHTML = "-"
 

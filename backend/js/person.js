@@ -152,18 +152,60 @@ export class Person {
 	get_data() {
 		let data = {}
 		data["title"] = this.title
-		data["name"] = this.get_name_string()
+
+		data["last_name"] = this.get_last_name()
+		data["rest_name"] = this.get_rest_name()
+
 		if (this.birth)
 			data["birth"] = this.birth.to_human_string()
+
+		for (let i in this.subj) {
+			let e = this.subj[i]
+			if (e[sym.TYPE] == sym.BIRTH) {
+				if (sym.LOCATION in e) {
+					let loc = e[sym.LOCATION]
+					let s = ""
+
+					if (sym.CITY in loc)
+						s += loc[sym.CITY] + ", "
+
+					if (sym.DISTRICT in loc)
+						s += loc[sym.DISTRICT] + ", "
+
+					if (sym.REGION in loc)
+						s += loc[sym.REGION] + ", "
+
+					if (sym.COUNTRY in loc)
+						s += loc[sym.COUNTRY] + ", "
+
+					data["birth_place"] = s.slice(0, -2)
+				}
+				break
+			}
+		}
 
 		if (this.death)
 			data["death"] = this.death.to_human_string()
 
+		if (this.birth) {
+			if (this.death) {
+				data["age"] = this.birth.diff(this.death)
+
+			} else {
+				data["age"] = this.birth.diff(new GtDate())
+				if (data["age"] > 120)
+					data["age"] = undefined
+			}
+		}
+
+		if (data["age"])
+			data["age"] = data["age"].toString()
+
 		return data
 	}
 
-	get_name_string() {
-		name = ""
+	get_last_name() {
+		let name = ""
 
 		if (this.name_actual.last)
 			name += this.name_actual.last
@@ -178,6 +220,12 @@ export class Person {
 			else
 				name += "()"
 		}
+
+		return name
+	}
+
+	get_rest_name() {
+		let name = ""
 
 		if (this.name_actual.first) {
 			if (name.length)
@@ -201,7 +249,7 @@ export class Person {
 
 		this.title = undefined
 
-		for (let i = 0; i < this.subj.length; i++) {
+		for (let i in this.subj) {
 			let e = this.subj[i]
 			switch (e[sym.TYPE]) {
 			case sym.BIRTH:
@@ -244,7 +292,7 @@ export class Person {
 			}
 		}
 
-		for (let i = 0; i < this.part.length; i++) {
+		for (let i in this.part) {
 			let e = this.part[i]
 			let sym_spouse = sym.WIFE
 			let sym_parent = sym.MOTHER

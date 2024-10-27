@@ -21,22 +21,30 @@ const months = {
 
 export class GtDate {
 	constructor(s) {
-		this.approx = false
-		if (s[0] == sym.APPROX) {
-			this.approx = true
-			s = s.slice(1)
-		}
-
-		if (s.length != 0) {
-			let d = s.split("-")
-			switch (d.length) {
-			case 3:
-				this.day = parseInt(d[2])
-			case 2:
-				this.month = parseInt(d[1])
-			case 1:
-				this.year = parseInt(d[0])
+		if (s) {
+			this.approx = false
+			if (s[0] == sym.APPROX) {
+				this.approx = true
+				s = s.slice(1)
 			}
+
+			if (s.length != 0) {
+				let d = s.split("-")
+				switch (d.length) {
+				case 3:
+					this.day = parseInt(d[2])
+				case 2:
+					this.month = parseInt(d[1])
+				case 1:
+					this.year = parseInt(d[0])
+				}
+			}
+
+		} else {
+			let now = new Date()
+			this.year = now.getFullYear()
+			this.month = now.getMonth() + 1
+			this.day = now.getDate()
 		}
 	}
 
@@ -63,7 +71,22 @@ export class GtDate {
 	}
 
 	diff(date) {
-		; // TODO
+		if (!this.year || !date.year)
+			return
+
+		let diff = Math.abs(this.year - date.year)
+		if (this.month && date.month) {
+			if (this.month > date.month) {
+				diff -= 1
+
+			} else if (this.month == date.month) {
+				if (this.day && date.day &&
+					this.day > date.day)
+					diff -= 1
+			}
+		}
+
+		return diff
 	}
 
 	to_string() {
