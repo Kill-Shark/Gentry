@@ -217,11 +217,13 @@ sectionTree.addEventListener("click", (e) => {
 			sidePanelMotherName.innerHTML = "-"
 
 		tree.draw(sectionTree)
+
+		sidePanel.classList.add("toggleSidePanel");
 		sidePanelInfo.classList.add("toggleSidePanelInfo")
 
-		if(btnArrow.classList.contains("reversed") != true){
-			btnArrow.classList.toggle("reversed")
-		}
+	} else {
+		sidePanel.classList.remove("toggleSidePanel");
+		sidePanelInfo.classList.remove("toggleSidePanelInfo")
 	}
 });
 
@@ -266,12 +268,3 @@ function switchToMapsSection(){
 // 	cleanSectionClasses()
 // 	starterPage.style.display = "flex"
 // }
-
-sidePanelBtn.addEventListener("click", ()=>{
-	sidePanel.classList.toggle("toggleSidePanel");
-	sidePanelInfo.classList.toggle("toggleSidePanelInfo")
-	btnArrow.classList.toggle("reversed")
-	
-})
-
-

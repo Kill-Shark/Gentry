@@ -21,7 +21,6 @@
   --action-color-active: #083e96;
   --absent-color: #ca904e;
   --starterPageBottom: 30px;
-  --sidePanelBtnWidth: 25px;
 }
 
 * {
@@ -248,32 +247,7 @@ main aside {
   right: 0;
   top: 0;
   display: none;
-  grid-template-columns: var(--sidePanelBtnWidth) 1fr;
   background-color: #eee;
-}
-main aside #sidePanelBtn {
-  background-color: var(--action-color);
-  transition: all 0.3s ease;
-  border: none;
-  width: var(--sidePanelBtnWidth);
-  grid-column: 1/2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-main aside #sidePanelBtn .btnArrow {
-  width: 22px;
-  height: 22px;
-  transform: scale(1, 1);
-}
-main aside #sidePanelBtn .reversed {
-  transform: scale(-1, 1);
-}
-main aside #sidePanelBtn:hover {
-  background-color: var(--action-color-hover);
-}
-main aside #sidePanelBtn:active {
-  background-color: var(--action-color-active);
 }
 main aside .sidePanelInfo {
   display: none;
@@ -298,7 +272,6 @@ main aside .sidePanelInfo #sidePanelBirthDate {
   font-family: Merriweather-bold;
 }
 main aside .toggleSidePanel {
-  width: var(--sidePanelBtnWidth);
   display: grid;
 }
 main aside .toggleSidePanelInfo {
