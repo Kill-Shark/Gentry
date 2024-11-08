@@ -54,6 +54,8 @@ export class Tree {
 		this.nodes = nodes
 
 		this.bg = bg
+		this.dpr = 1
+		this.ctx = undefined
 
 		this.zoom = 1.0
 		this.pan_x = 0
@@ -117,6 +119,9 @@ export class Tree {
 			for (let i in view.layout) {
 				let layout = view.layout[i]
 				let num = layout[sym.SUBJECT]
+				if (num < 0)
+					continue
+
 				let node = this.nodes[num]
 
 				if ("x" in layout)
@@ -164,24 +169,26 @@ export class Tree {
 		this.max_y += view.h
 	}
 
-	fit(sheet) {
-		this.zoom = sheet.height / (this.max_y - this.min_y)
+	fit() {
+		let a = this.ctx.canvas.height / (this.max_y - this.min_y)
+		let b = this.ctx.canvas.width / (this.max_x - this.min_x)
+		this.zoom = Math.min(a, b)
 	}
 
 	zoom_in(ex, ey) {
 		this.zoom += 0.1 * this.zoom
-		this.pan_x = this.pan_x + (this.pan_x - ex) * 0.1
-		this.pan_y = this.pan_y + (this.pan_y - ey) * 0.1
+		this.pan_x = this.pan_x + (this.pan_x - ex * this.dpr) * 0.1
+		this.pan_y = this.pan_y + (this.pan_y - ey * this.dpr) * 0.1
 	}
 
 	zoom_out(ex, ey) {
 		this.zoom -= 0.1 * this.zoom
-		this.pan_x = this.pan_x - (this.pan_x - ex) * 0.1
-		this.pan_y = this.pan_y - (this.pan_y - ey) * 0.1
+		this.pan_x = this.pan_x - (this.pan_x - ex * this.dpr) * 0.1
+		this.pan_y = this.pan_y - (this.pan_y - ey * this.dpr) * 0.1
 	}
 
-	draw(sheet) {
-		let ctx = sheet.getContext("2d")
+	draw() {
+		let ctx = this.ctx
 
 		let w = this.view.w * this.zoom
 		let h = this.view.h * this.zoom
@@ -206,7 +213,7 @@ export class Tree {
 		}
 
 		ctx.fillStyle = this.bg
-		ctx.fillRect(0, 0, sheet.width, sheet.height)
+		ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 
 		let line = this.nodes.slice()
 		line.sort((a, b) => a.y < b.y)

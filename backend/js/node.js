@@ -31,7 +31,7 @@ export class Node {
 	}
 
 	is_hidden() {
-		return this.person.hidden
+		return this.person.is_hidden()
 	}
 
 	spread(nodes, view) {

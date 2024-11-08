@@ -9,7 +9,7 @@ let tree
 
 //стартовые кнопки
 
-const 
+const
 btnCreateStart = document.getElementById("btnCreateStart"),
 btnLoadInputStart = document.getElementById("btnLoadInputStart")
 
@@ -58,6 +58,14 @@ const btnArrow = document.getElementById("btnArrow")
 const starterPage = document.getElementById("starterPage")
 const loadedPage = document.getElementById("loadedPage")
 
+let dpr = window.devicePixelRatio || 1
+
+sectionTree.style.width = sectionTree.style.width || sectionTree.width + 'px'
+sectionTree.style.height = sectionTree.style.height || sectionTree.height + 'px'
+
+sectionTree.width = Math.ceil(sectionTree.width * dpr);
+sectionTree.height = Math.ceil(sectionTree.height * dpr);
+
 // автоматическое закрытие панели настроек после нажатия кнопки
 document.querySelectorAll(".dropdown-bar").forEach(n => n.addEventListener("click", ()=>{
 	dropdown.classList.add("closed");
@@ -98,7 +106,7 @@ function read_file(file){
 }
 
 // TEMP
-let tree_type = "common"
+let tree_type = "layout"
 
 btnTree.addEventListener("click", build_tree)
 
@@ -107,8 +115,11 @@ function build_tree(e) {
 		return
 
 	tree = gen.tree_get(tree_type)
-	tree.fit(sectionTree)
-	tree.draw(sectionTree)
+	tree.dpr = dpr
+	tree.ctx = sectionTree.getContext("2d")
+
+	tree.fit()
+	tree.draw()
 
 	// TEMP
 	if (tree_type == "common") {
@@ -134,7 +145,7 @@ sectionTree.addEventListener("wheel", (e) => {
 		tree.zoom_out(e.x, e.y)
 	}
 
-	tree.draw(sectionTree)
+	tree.draw()
 });
 
 sectionTree.addEventListener("mousemove", (e) => {
@@ -142,9 +153,9 @@ sectionTree.addEventListener("mousemove", (e) => {
 		return
 
 	if (e.buttons == 1) {
-		tree.pan_x += e.movementX
-		tree.pan_y += e.movementY
-		tree.draw(sectionTree)
+		tree.pan_x += e.movementX * dpr
+		tree.pan_y += e.movementY * dpr
+		tree.draw()
 	}
 });
 
@@ -216,7 +227,7 @@ sectionTree.addEventListener("click", (e) => {
 		else
 			sidePanelMotherName.innerHTML = "-"
 
-		tree.draw(sectionTree)
+		tree.draw()
 
 		sidePanel.classList.add("toggleSidePanel");
 		sidePanelInfo.classList.add("toggleSidePanelInfo")

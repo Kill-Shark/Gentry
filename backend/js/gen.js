@@ -101,7 +101,11 @@ export class Gen {
 					if (!(sym.SUBJECT in layout[k]))
 						continue
 
-					layout[k][sym.SUBJECT] = this.book[layout[k][sym.SUBJECT]].num
+					let id = layout[k][sym.SUBJECT]
+					if (id in this.book)
+						layout[k][sym.SUBJECT] = this.book[layout[k][sym.SUBJECT]].num
+					else
+						layout[k][sym.SUBJECT] = -1
 				}
 			}
 		}

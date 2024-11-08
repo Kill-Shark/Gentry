@@ -23,6 +23,13 @@ export class Person {
 		this.clear()
 	}
 
+	is_hidden() {
+		if (this.hidden || this.subj.length == 0)
+			return true
+
+		return false
+	}
+
 	add_event_raw(e) {
 		if (sym.SUBJECT in e && e[sym.SUBJECT].id == this.id) {
 			this.subj.push(e)
