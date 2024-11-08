@@ -24,7 +24,6 @@
 	--action-color-active: #083e96;
 	--absent-color: #ca904e;
 	--starterPageBottom: 30px;
-	--sidePanelBtnWidth: 25px;
 
 }
 
@@ -288,38 +287,8 @@ main{
 		right: 0;
 		top: 0;
 		display: none;
-		grid-template-columns: var(--sidePanelBtnWidth) 1fr;
 		background-color: #eee;
 		
-		#sidePanelBtn{
-			background-color: var(--action-color);
-			transition: all .3s ease;
-			border: none;
-			width: var(--sidePanelBtnWidth);
-			grid-column: 1/2;
-
-			display: flex;
-			justify-content: center;
-			align-items: center;
-
-
-			.btnArrow{
-				width: 22px;
-				height: 22px;
-				transform: scale(1, 1)
-			}
-
-			.reversed{
-				transform: scale(-1, 1)
-			}
-
-		}
-		#sidePanelBtn:hover{
-			background-color: var(--action-color-hover);
-		}
-		#sidePanelBtn:active{
-			background-color: var(--action-color-active);
-		}
 
 		.sidePanelInfo{
 			display: none;
@@ -352,7 +321,6 @@ main{
 		}
 
 		.toggleSidePanel{
-			width: var(--sidePanelBtnWidth);
 			display: grid;
 		}
 

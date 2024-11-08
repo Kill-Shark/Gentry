@@ -46,11 +46,17 @@ const sidePanelLastName = document.getElementById("sidePanelLastName")
 const sidePanelRestName = document.getElementById("sidePanelRestName")
 const sidePanelBirthDate = document.getElementById("sidePanelBirthDate")
 const sidePanelBirthPlace = document.getElementById("sidePanelBirthPlace")
+const sidePanelAge = document.getElementById("sidePanelAge")
 const sidePanelAgeNum = document.getElementById("sidePanelAgeNum")
+const sidePanelDeath = document.getElementById("sidePanelDeath")
 const sidePanelDeathDate = document.getElementById("sidePanelDeathDate")
+const sidePanelDeathPlaceGlobal = document.getElementById("sidePanelDeathPlaceGlobal")
 const sidePanelDeathPlace = document.getElementById("sidePanelDeathPlace")
+const sidePanelDeathCauseGlobal = document.getElementById("sidePanelDeathCauseGlobal")
 const sidePanelDeathCause = document.getElementById("sidePanelDeathCause")
+const sidePanelFather = document.getElementById("sidePanelFather")
 const sidePanelFatherName = document.getElementById("sidePanelFatherName")
+const sidePanelMother = document.getElementById("sidePanelMother")
 const sidePanelMotherName = document.getElementById("sidePanelMotherName")
 
 const btnArrow = document.getElementById("btnArrow")
@@ -197,35 +203,52 @@ sectionTree.addEventListener("click", (e) => {
 		else
 			sidePanelBirthPlace.innerHTML = "-"
 
-		if (data["age"])
+		if (data["age"]){
 			sidePanelAgeNum.innerHTML = data["age"]
+			sidePanelAge.style.display = "flex"
+		}
 		else
-			sidePanelAgeNum.innerHTML = "-"
+			// sidePanelAgeNum.innerHTML = "-"
+			sidePanelAge.style.display = "none"
 
-		if (data["death"])
+		if (data["death"]){
 			sidePanelDeathDate.innerHTML = data["death"]
+			sidePanelDeath.style.display = "block"
+		}
 		else
-			sidePanelDeathDate.innerHTML = "-"
+			// sidePanelDeathDate.innerHTML = "-"
+			sidePanelDeath.style.display = "none"
 
-		if (data["death_place"])
-			;
+		if (data["death_place"]){
+			sidePanelDeathPlaceGlobal.style.display = "block"
+		}
 		else
-			sidePanelDeathPlace.innerHTML = "-"
+			// sidePanelDeathPlace.innerHTML = "-"
+			sidePanelDeathPlaceGlobal.style.display = "none"
 
-		if (data["death_cause"])
-			;
+		if (data["death_cause"]){
+			sidePanelDeathCauseGlobal.style.display = "block"
+		}
 		else
-			sidePanelDeathCause.innerHTML = "-"
+			// sidePanelDeathCause.innerHTML = "-"
+			sidePanelDeathCauseGlobal.style.display = "none"
 
-		if (data["father"])
-			;
-		else
-			sidePanelFatherName.innerHTML = "-"
 
-		if (data["mother"])
-			;
+		if (data["father"]){
+			sidePanelFather.display.style = "block"
+		}
 		else
-			sidePanelMotherName.innerHTML = "-"
+			// sidePanelFatherName.innerHTML = "-"
+			sidePanelFather.style.display = "none"
+
+
+		if (data["mother"]){
+			sidePanelMother.style.display = "block"
+		}
+			
+		else
+			// sidePanelMotherName.innerHTML = "-"
+			sidePanelMother.style.display = "none"
 
 		tree.draw()
 
