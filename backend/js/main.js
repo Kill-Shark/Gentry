@@ -46,17 +46,11 @@ const sidePanelLastName = document.getElementById("sidePanelLastName")
 const sidePanelRestName = document.getElementById("sidePanelRestName")
 const sidePanelBirthDate = document.getElementById("sidePanelBirthDate")
 const sidePanelBirthPlace = document.getElementById("sidePanelBirthPlace")
-const sidePanelAge = document.getElementById("sidePanelAge")
 const sidePanelAgeNum = document.getElementById("sidePanelAgeNum")
-const sidePanelDeath = document.getElementById("sidePanelDeath")
 const sidePanelDeathDate = document.getElementById("sidePanelDeathDate")
-const sidePanelDeathPlaceGlobal = document.getElementById("sidePanelDeathPlaceGlobal")
 const sidePanelDeathPlace = document.getElementById("sidePanelDeathPlace")
-const sidePanelDeathCauseGlobal = document.getElementById("sidePanelDeathCauseGlobal")
 const sidePanelDeathCause = document.getElementById("sidePanelDeathCause")
-const sidePanelFather = document.getElementById("sidePanelFather")
 const sidePanelFatherName = document.getElementById("sidePanelFatherName")
-const sidePanelMother = document.getElementById("sidePanelMother")
 const sidePanelMotherName = document.getElementById("sidePanelMotherName")
 
 const btnArrow = document.getElementById("btnArrow")
@@ -180,7 +174,7 @@ sectionTree.addEventListener("click", (e) => {
 	if (Math.abs(tree.mpx - e.x) + Math.abs(tree.mpy - e.y) > 5)
 		return
 
-	let node = tree.get_at(e.layerX, e.layerY)
+	let node = tree.get_at(e.layerX * dpr, e.layerY * dpr)
 	if (node) {
 		let data = node.person.get_data()
 
@@ -203,52 +197,35 @@ sectionTree.addEventListener("click", (e) => {
 		else
 			sidePanelBirthPlace.innerHTML = "-"
 
-		if (data["age"]){
+		if (data["age"])
 			sidePanelAgeNum.innerHTML = data["age"]
-			sidePanelAge.style.display = "flex"
-		}
 		else
-			// sidePanelAgeNum.innerHTML = "-"
-			sidePanelAge.style.display = "none"
+			sidePanelAgeNum.innerHTML = "-"
 
-		if (data["death"]){
+		if (data["death"])
 			sidePanelDeathDate.innerHTML = data["death"]
-			sidePanelDeath.style.display = "block"
-		}
 		else
-			// sidePanelDeathDate.innerHTML = "-"
-			sidePanelDeath.style.display = "none"
+			sidePanelDeathDate.innerHTML = "-"
 
-		if (data["death_place"]){
-			sidePanelDeathPlaceGlobal.style.display = "block"
-		}
+		if (data["death_place"])
+			;
 		else
-			// sidePanelDeathPlace.innerHTML = "-"
-			sidePanelDeathPlaceGlobal.style.display = "none"
+			sidePanelDeathPlace.innerHTML = "-"
 
-		if (data["death_cause"]){
-			sidePanelDeathCauseGlobal.style.display = "block"
-		}
+		if (data["death_cause"])
+			;
 		else
-			// sidePanelDeathCause.innerHTML = "-"
-			sidePanelDeathCauseGlobal.style.display = "none"
+			sidePanelDeathCause.innerHTML = "-"
 
-
-		if (data["father"]){
-			sidePanelFather.display.style = "block"
-		}
+		if (data["father"])
+			;
 		else
-			// sidePanelFatherName.innerHTML = "-"
-			sidePanelFather.style.display = "none"
+			sidePanelFatherName.innerHTML = "-"
 
-
-		if (data["mother"]){
-			sidePanelMother.style.display = "block"
-		}
-			
+		if (data["mother"])
+			;
 		else
-			// sidePanelMotherName.innerHTML = "-"
-			sidePanelMother.style.display = "none"
+			sidePanelMotherName.innerHTML = "-"
 
 		tree.draw()
 
