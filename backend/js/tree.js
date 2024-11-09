@@ -247,7 +247,7 @@ export class Tree {
 				}
 
 				let mmid_x = (node_grab_x + mid_x) / 2
-				this.draw_curve(ctx, 4, node.hue,
+				this.draw_curve(ctx, 4 * this.dpr, node.hue,
 								mid_x, mid_y,
 								mmid_x, mid_y,
 								mmid_x, node.ty,
@@ -259,7 +259,7 @@ export class Tree {
 
 				let mid_y = (node.ry + node.root_ty) / 2
 
-				this.draw_curve(ctx, 4, node.hue,
+				this.draw_curve(ctx, 4 * this.dpr, node.hue,
 								node.tx, node.ty - h / 2,
 								node.tx, mid_y, node.root_tx, mid_y, node.root_tx, node.root_ty)
 			}
@@ -270,18 +270,18 @@ export class Tree {
 			if (node.is_hidden())
 				continue
 
-			ctx.lineWidth = 8
+			ctx.lineWidth = 8 * this.dpr
 			ctx.strokeStyle = this.bg
 			ctx.strokeRect(node.rx, node.ry, w, h)
 
-			ctx.lineWidth = 4
+			ctx.lineWidth = 4 * this.dpr
 			ctx.strokeStyle = "HSL(" + node.hue + ", 20%, 50%)"
 			ctx.strokeRect(node.rx, node.ry, w, h)
 
 			ctx.fillStyle = "HSL(" + node.hue + ", 20%, 50%)"
 
-			let t = 6
-			let th = 3
+			let t = 6 * this.dpr
+			let th = 3 * this.dpr
 
 			if (node.connections[0])
 				ctx.fillRect(node.tx - th, node.ry - t, t, t)
