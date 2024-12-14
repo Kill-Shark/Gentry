@@ -137,7 +137,6 @@ function build_tree(e) {
 
 	cleanSectionClasses()
 	sectionTree.style.display = "block";
-	sidePanel.style.display = "grid"
 }
 
 sectionTree.addEventListener("wheel", (e) => {
@@ -163,6 +162,7 @@ sectionTree.addEventListener("mousemove", (e) => {
 		tree.pan_y += e.movementY * dpr
 		tree.draw()
 	}
+
 });
 
 sectionTree.addEventListener("mousedown", (e) => {
@@ -171,6 +171,8 @@ sectionTree.addEventListener("mousedown", (e) => {
 
 	tree.mpx = e.x
 	tree.mpy = e.y
+
+
 });
 
 sectionTree.addEventListener("click", (e) => {
@@ -252,10 +254,13 @@ sectionTree.addEventListener("click", (e) => {
 
 		sidePanel.classList.add("toggleSidePanel");
 		sidePanelInfo.classList.add("toggleSidePanelInfo")
+		sidePanel.style.display = "flex"
 
 	} else {
 		sidePanel.classList.remove("toggleSidePanel");
 		sidePanelInfo.classList.remove("toggleSidePanelInfo")
+		sidePanel.style.display = "none"
+
 	}
 });
 

@@ -286,32 +286,38 @@ main{
 		position: absolute;
 		right: 0;
 		top: 0;
+
 		display: none;
 		background-color: #eee;
-		
+		width: 360px;
+		flex-direction: column;
+		align-items: center;
+
+		#sidePanelImg{
+			width: calc(480px / 1.5);
+			height: calc(640px / 1.5);
+			margin-top: 20px;
+			border-radius: 3%;
+
+		}
 
 		.sidePanelInfo{
+			width: 460px;
+			margin-top: 20px;
 			display: none;
-			min-width: 460px;
-
 			flex-direction: column;
+			align-items: start;
+			flex-wrap: wrap;
+			
 			gap: 15px;
+			width: calc(480px / 1.5);
 
-			div{
-				display: flex;
-				justify-content: center;
-			}
 
 			#sidePanelTitle{
 				text-align: center;
 				font-family: Merriweather-bold;
 			}
 
-			#sidePanelImg{
-				width: calc(480px / 1.5);
-				height: calc(640px / 1.5);
-				margin-top: 10px;
-			}
 
 			#sidePanelBirthDate{
 				font-family: Merriweather-bold;
@@ -321,7 +327,7 @@ main{
 		}
 
 		.toggleSidePanel{
-			display: grid;
+			display: flex;
 		}
 
 		.toggleSidePanelInfo{
